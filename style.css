@@ -1,0 +1,1231 @@
+/* ===== Design Tokens ===== */
+:root {
+    /* Colors - 2025 Premium Palette */
+    --bg-space: #0f0f1c;
+    --bg-deep: #12121e;
+    --glass-primary: rgba(30, 30, 46, 0.7);
+    --glass-secondary: rgba(40, 40, 60, 0.5);
+    --glass-tertiary: rgba(50, 50, 70, 0.3);
+
+    /* Electric Blue Gradient */
+    --accent-start: #4e9fff;
+    --accent-end: #00d4ff;
+    --accent-gradient: linear-gradient(135deg, var(--accent-start) 0%, var(--accent-end) 100%);
+
+    /* Text */
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-tertiary: #64748b;
+
+    /* Status Colors */
+    --danger: #ff4757;
+    --warning: #ffa502;
+    --success: #26de81;
+
+    /* Shadows & Effects */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.12);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.3);
+    --glow-accent: 0 0 24px rgba(78, 159, 255, 0.3);
+
+    /* Border Radius */
+    --radius-sm: 12px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-full: 999px;
+
+    /* Spacing Scale */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-12: 48px;
+
+    /* Typography */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ===== Reset & Base ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--font-sans);
+    background: var(--bg-space);
+    background-image:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(78, 159, 255, 0.15), transparent),
+        radial-gradient(ellipse 60% 80% at 0% 100%, rgba(0, 212, 255, 0.1), transparent),
+        radial-gradient(ellipse 60% 80% at 100% 100%, rgba(78, 159, 255, 0.08), transparent);
+    background-attachment: fixed;
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+}
+
+/* ===== App Wrapper ===== */
+.app-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6);
+    position: relative;
+}
+
+/* ===== User Avatar Menu ===== */
+.user-menu-wrapper {
+    position: fixed;
+    top: var(--space-6);
+    right: var(--space-6);
+    z-index: 1000;
+}
+
+.user-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-full);
+    background: var(--glass-primary);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+}
+
+.user-avatar:hover {
+    transform: scale(1.05);
+    box-shadow: var(--glow-accent);
+    border-color: rgba(78, 159, 255, 0.4);
+}
+
+.user-avatar:active {
+    transform: scale(0.98);
+}
+
+.avatar-letter {
+    font-size: 16px;
+    font-weight: 700;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.avatar-ring {
+    position: absolute;
+    inset: -2px;
+    border-radius: var(--radius-full);
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+    filter: blur(8px);
+}
+
+.user-avatar:hover .avatar-ring {
+    opacity: 0.6;
+}
+
+/* User Dropdown */
+.user-dropdown {
+    position: absolute;
+    top: calc(100% + var(--space-3));
+    right: 0;
+    width: 240px;
+    background: var(--glass-primary);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-2);
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+    pointer-events: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.user-dropdown.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+}
+
+.user-dropdown-header {
+    padding: var(--space-3);
+}
+
+.user-info-full {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.user-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.user-email-small {
+    font-size: 13px;
+    color: var(--text-tertiary);
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: var(--space-2) 0;
+}
+
+.dropdown-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-primary);
+}
+
+.dropdown-item.danger:hover {
+    background: rgba(255, 71, 87, 0.1);
+    color: var(--danger);
+}
+
+.dropdown-item svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+/* ===== Main Container ===== */
+.main-container {
+    width: 100%;
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+.app-card {
+    background: var(--glass-primary);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-8);
+    position: relative;
+    overflow: hidden;
+}
+
+.app-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    pointer-events: none;
+}
+
+/* ===== Header ===== */
+.app-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.app-title {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--space-2);
+    filter: drop-shadow(0 2px 8px rgba(78, 159, 255, 0.4));
+}
+
+.app-subtitle {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+}
+
+/* ===== Task Input ===== */
+.task-input-wrapper {
+    margin-bottom: var(--space-6);
+}
+
+.task-input-container {
+    position: relative;
+    background: var(--glass-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.task-input-container:focus-within {
+    background: var(--glass-primary);
+    border-color: rgba(78, 159, 255, 0.4);
+    box-shadow: 0 0 0 3px rgba(78, 159, 255, 0.1);
+}
+
+.task-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-size: 15px;
+    font-weight: 500;
+    padding: var(--space-3) var(--space-4);
+    font-family: var(--font-sans);
+}
+
+.task-input::placeholder {
+    color: var(--text-tertiary);
+    font-weight: 500;
+}
+
+.add-task-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: var(--accent-gradient);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 16px rgba(78, 159, 255, 0.4);
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+}
+
+.add-task-btn.visible {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: all;
+}
+
+.add-task-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(78, 159, 255, 0.6);
+}
+
+.add-task-btn:active {
+    transform: scale(0.95);
+}
+
+.add-task-btn svg {
+    color: white;
+}
+
+/* Task Toolbar */
+.task-toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    opacity: 0;
+    transform: translateY(-8px);
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.task-toolbar.visible {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 60px;
+}
+
+.toolbar-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: var(--glass-tertiary);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toolbar-btn:hover {
+    background: var(--glass-secondary);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: var(--text-primary);
+}
+
+.toolbar-btn svg {
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+
+/* Hide the native date input but keep it accessible */
+.toolbar-btn input[type="datetime-local"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    pointer-events: none;
+}
+
+.tabs-container {
+    display: inline-flex;
+    background: var(--glass-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: var(--space-1);
+    position: relative;
+}
+
+.tab {
+    position: relative;
+    padding: var(--space-2) var(--space-5);
+    background: transparent;
+    border: none;
+    color: var(--text-tertiary);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 2;
+}
+
+.tab.active {
+    color: var(--text-primary);
+}
+
+.tab-indicator {
+    position: absolute;
+    top: var(--space-1);
+    left: var(--space-1);
+    height: calc(100% - 8px);
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1;
+}
+
+/* ===== Task List ===== */
+.tasks-container {
+    min-height: 300px;
+    position: relative;
+}
+
+.task-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.task-item {
+    background: var(--glass-secondary);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: taskSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes taskSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.task-item:hover {
+    background: rgba(60, 60, 80, 0.6);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.task-item.completed {
+    opacity: 0.6;
+}
+
+/* Checkbox */
+.task-checkbox {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(148, 163, 184, 0.4);
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+}
+
+.task-checkbox:hover {
+    border-color: var(--accent-start);
+    box-shadow: 0 0 12px rgba(78, 159, 255, 0.3);
+}
+
+.task-checkbox:checked {
+    background: var(--accent-gradient);
+    border-color: var(--accent-start);
+    box-shadow: 0 0 16px rgba(78, 159, 255, 0.5);
+}
+
+.task-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2.5px 2.5px 0;
+    transform: rotate(45deg);
+}
+
+/* Task Content */
+.task-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 0;
+}
+
+.task-text {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+    word-wrap: break-word;
+    transition: all 0.3s;
+}
+
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: var(--text-tertiary);
+}
+
+.task-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.due-date-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: rgba(78, 159, 255, 0.15);
+    border: 1px solid rgba(78, 159, 255, 0.3);
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent-end);
+}
+
+.due-date-chip.overdue {
+    background: rgba(255, 71, 87, 0.15);
+    border-color: rgba(255, 71, 87, 0.3);
+    color: var(--danger);
+}
+
+.due-date-chip.today {
+    background: rgba(255, 165, 2, 0.15);
+    border-color: rgba(255, 165, 2, 0.3);
+    color: var(--warning);
+}
+
+.due-date-chip svg {
+    width: 11px;
+    height: 11px;
+}
+
+/* Task Actions */
+.task-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    opacity: 0;
+    transform: translateX(8px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.task-item:hover .task-actions {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.task-action-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--text-tertiary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.task-action-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+}
+
+.task-action-btn.delete:hover {
+    background: rgba(255, 71, 87, 0.15);
+    color: var(--danger);
+}
+
+.task-action-btn.calendar {
+    text-decoration: none;
+}
+
+.task-action-btn.calendar:hover {
+    background: rgba(78, 159, 255, 0.15);
+    color: var(--accent-start);
+}
+
+/* ===== Empty State ===== */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-12) var(--space-6);
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 0.6s 0.3s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.empty-orb {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(78, 159, 255, 0.4), rgba(0, 212, 255, 0.1));
+    margin-bottom: var(--space-6);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-16px);
+    }
+}
+
+.empty-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+}
+
+/* ===== Utility Classes ===== */
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    opacity: 1 !important;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 640px) {
+    .app-wrapper {
+        padding: var(--space-5);
+    }
+
+    .user-menu-wrapper {
+        top: var(--space-5);
+        right: var(--space-5);
+    }
+
+    .app-card {
+        padding: var(--space-6);
+    }
+
+    .app-title {
+        font-size: 28px;
+    }
+
+    .task-item {
+        padding: var(--space-3);
+    }
+}
+
+@media (max-width: 480px) {
+    .tabs-container {
+        width: 100%;
+    }
+
+    .tab {
+        flex: 1;
+        text-align: center;
+        padding: var(--space-2) var(--space-3);
+    }
+}
+
+/* ===== Smooth Scrollbar ===== */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+/* Screen reader only - accessible hidden */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ===== Light Mode Theme ===== */
+[data-theme="light"] {
+    --bg-space: #f8fafc;
+    --bg-deep: #f1f5f9;
+    --glass-primary: rgba(255, 255, 255, 0.85);
+    --glass-secondary: rgba(241, 245, 249, 0.8);
+    --glass-tertiary: rgba(226, 232, 240, 0.6);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-tertiary: #64748b;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] body {
+    background: var(--bg-space);
+    background-image: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(78, 159, 255, 0.12), transparent),
+        radial-gradient(ellipse 60% 80% at 0% 100%, rgba(0, 212, 255, 0.08), transparent);
+}
+
+[data-theme="light"] .app-card {
+    border-color: rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .app-card::before {
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.04), transparent);
+}
+
+[data-theme="light"] .user-avatar,
+[data-theme="light"] .user-dropdown,
+[data-theme="light"] .theme-toggle {
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .dropdown-divider {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .task-input-container,
+[data-theme="light"] .toolbar-btn,
+[data-theme="light"] .tabs-container,
+[data-theme="light"] .task-item {
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .task-checkbox {
+    border-color: rgba(71, 85, 105, 0.3);
+}
+
+[data-theme="light"] .empty-orb {
+    background: radial-gradient(circle at 30% 30%, rgba(78, 159, 255, 0.3), rgba(0, 212, 255, 0.1));
+}
+
+/* ===== Theme Toggle Button ===== */
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--glass-primary);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--text-secondary);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05);
+    color: var(--accent-start);
+    box-shadow: var(--glow-accent);
+}
+
+.theme-toggle .sun-icon {
+    display: none;
+}
+
+.theme-toggle .moon-icon {
+    display: block;
+}
+
+[data-theme="light"] .theme-toggle .sun-icon {
+    display: block;
+}
+
+[data-theme="light"] .theme-toggle .moon-icon {
+    display: none;
+}
+
+.user-menu-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ===== Custom Glassmorphic Date Picker ===== */
+.custom-datepicker {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    width: 320px;
+    background: var(--glass-primary);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg), 0 0 40px rgba(78, 159, 255, 0.1);
+    padding: var(--space-4);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.custom-datepicker.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.custom-datepicker.hidden {
+    display: none;
+}
+
+[data-theme="light"] .custom-datepicker {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.datepicker-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .datepicker-header {
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+.datepicker-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.datepicker-nav {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-sm);
+    background: var(--glass-tertiary);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.datepicker-nav:hover {
+    background: var(--glass-secondary);
+    color: var(--accent-start);
+    border-color: rgba(78, 159, 255, 0.3);
+}
+
+.datepicker-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    margin-bottom: var(--space-2);
+}
+
+.datepicker-weekdays span {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    padding: var(--space-2);
+}
+
+.datepicker-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.datepicker-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.datepicker-day:hover:not(.other-month):not(.selected) {
+    background: var(--glass-tertiary);
+    color: var(--text-primary);
+}
+
+.datepicker-day.other-month {
+    color: var(--text-tertiary);
+    opacity: 0.4;
+}
+
+.datepicker-day.today {
+    color: var(--accent-start);
+    font-weight: 700;
+    position: relative;
+}
+
+.datepicker-day.today::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    width: 4px;
+    height: 4px;
+    background: var(--accent-start);
+    border-radius: 50%;
+}
+
+.datepicker-day.selected {
+    background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(78, 159, 255, 0.4);
+}
+
+.datepicker-day.selected::after {
+    display: none;
+}
+
+.datepicker-time {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) 0;
+    margin-top: var(--space-3);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .datepicker-time {
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+.time-label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.time-input {
+    padding: var(--space-2) var(--space-3);
+    background: var(--glass-tertiary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.time-input:focus {
+    outline: none;
+    border-color: var(--accent-start);
+    box-shadow: 0 0 0 3px rgba(78, 159, 255, 0.15);
+}
+
+[data-theme="light"] .time-input {
+    background: rgba(241, 245, 249, 0.8);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.datepicker-footer {
+    display: flex;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+    padding-top: var(--space-3);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .datepicker-footer {
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+.datepicker-btn {
+    flex: 1;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.datepicker-btn.clear {
+    background: transparent;
+    color: var(--text-tertiary);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.datepicker-btn.clear:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.datepicker-btn.today {
+    background: var(--glass-tertiary);
+    color: var(--text-secondary);
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.datepicker-btn.today:hover {
+    background: var(--glass-secondary);
+    color: var(--text-primary);
+}
+
+.datepicker-btn.confirm {
+    background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
+    color: white;
+    box-shadow: 0 4px 12px rgba(78, 159, 255, 0.3);
+}
+
+.datepicker-btn.confirm:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(78, 159, 255, 0.4);
+}
+
+[data-theme="light"] .datepicker-btn.clear {
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .datepicker-btn.today {
+    background: rgba(241, 245, 249, 0.8);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Fix datepicker visibility */
+.custom-datepicker.hidden {
+    display: block !important;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.custom-datepicker.visible {
+    display: block !important;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.task-toolbar {
+    position: relative;
+}
+
+/* Allow datepicker to overflow toolbar */
+.task-toolbar.visible {
+    overflow: visible !important;
+}
+
+.task-input-wrapper {
+    position: relative;
+    overflow: visible;
+}
+
+/* CRITICAL: Fix datepicker overlay positioning */
+.custom-datepicker {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(0.95) !important;
+    background: rgba(18, 18, 30, 0.98) !important;
+    backdrop-filter: blur(40px) !important;
+    -webkit-backdrop-filter: blur(40px) !important;
+    z-index: 9999 !important;
+}
+
+.custom-datepicker.visible {
+    transform: translate(-50%, -50%) scale(1) !important;
+}
+
+[data-theme="light"] .custom-datepicker {
+    background: rgba(255, 255, 255, 0.98) !important;
+}
+
+/* Hide ugly time input browser icons */
+.time-input::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.time-input::-webkit-inner-spin-button {
+    display: none;
+}
+
+/* Datepicker overlay backdrop */
+.datepicker-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 9998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.datepicker-backdrop.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Add more space between filter tabs and task list */
+.tasks-container {
+    margin-top: var(--space-4);
+}
+
+.filter-tabs {
+    margin-bottom: var(--space-4);
+}
+
+/* Fix tab indicator spacing consistency */
+.tabs-container {
+    padding: 4px !important;
+}
+
+.tab {
+    padding: 8px 20px !important;
+}
+
+.tab-indicator {
+    height: calc(100% - 8px) !important;
+    top: 4px !important;
+    border-radius: 8px !important;
+}
+
+/* Fix tab indicator - remove initial left offset, let JS control position */
+.tab-indicator {
+    left: 0 !important;
+}

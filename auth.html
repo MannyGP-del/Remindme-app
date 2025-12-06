@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to RemindMe</title>
+    <link rel="stylesheet" href="auth-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="auth-wrapper">
+        <main class="auth-container">
+            <div class="auth-card">
+                <!-- Header -->
+                <header class="auth-header">
+                    <h1 class="auth-title">RemindMe</h1>
+                    <p class="auth-subtitle">Your personal task sanctuary</p>
+                </header>
+
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form">
+                    <h2 class="form-title">Welcome back</h2>
+
+                    <div class="form-group">
+                        <label for="login-email">Email address</label>
+                        <input type="email" id="login-email" placeholder="you@example.com" required
+                            autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="••••••••" required
+                            autocomplete="current-password">
+                    </div>
+
+                    <button type="submit" class="auth-btn">
+                        <span>Sign in</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+
+                    <p class="toggle-text">
+                        Don't have an account? <a href="#" id="show-register">Create one</a>
+                    </p>
+                </form>
+
+                <!-- Register Form -->
+                <form id="register-form" class="auth-form hidden">
+                    <h2 class="form-title">Create your account</h2>
+
+                    <div class="form-group">
+                        <label for="register-email">Email address</label>
+                        <input type="email" id="register-email" placeholder="you@example.com" required
+                            autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" placeholder="••••••••" required minlength="6"
+                            autocomplete="new-password">
+                        <span class="field-hint">At least 6 characters</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-password-confirm">Confirm password</label>
+                        <input type="password" id="register-password-confirm" placeholder="••••••••" required
+                            minlength="6" autocomplete="new-password">
+                    </div>
+
+                    <button type="submit" class="auth-btn">
+                        <span>Create account</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+
+                    <p class="toggle-text">
+                        Already have an account? <a href="#" id="show-login">Sign in</a>
+                    </p>
+                </form>
+
+                <!-- Messages -->
+                <div id="error-message" class="message error hidden"></div>
+                <div id="success-message" class="message success hidden"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js"></script>
+</body>
+
+</html>
