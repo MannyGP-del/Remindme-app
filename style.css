@@ -2245,3 +2245,136 @@ body {
 [data-theme="light"] .user-avatar:focus .avatar-ring {
     opacity: 0 !important;
 }
+
+/* ============================================================
+   FIXED HEADER + SCROLLABLE TASK LIST
+   Mobile app-like behavior
+   ============================================================ */
+
+/* On mobile, create fixed header area */
+@media (max-width: 640px) {
+    .app-wrapper {
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        overflow: hidden !important;
+    }
+    
+    .main-container {
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100% !important;
+        overflow: hidden !important;
+    }
+    
+    .app-card {
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100% !important;
+        overflow: hidden !important;
+    }
+    
+    /* Fixed header section */
+    .app-header {
+        flex-shrink: 0 !important;
+    }
+    
+    /* Fixed input section */
+    .task-input-wrapper {
+        flex-shrink: 0 !important;
+    }
+    
+    /* Fixed tabs section */
+    .filter-tabs {
+        flex-shrink: 0 !important;
+    }
+    
+    /* Scrollable task list */
+    .tasks-container {
+        flex: 1 !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+        padding-bottom: 24px !important;
+    }
+    
+    /* Smooth scrolling */
+    .tasks-container {
+        scroll-behavior: smooth;
+    }
+    
+    /* Hide scrollbar for cleaner look */
+    .tasks-container::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    .tasks-container::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+    
+    [data-theme="light"] .tasks-container::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* ============================================================
+   MODERN SLEEK SCROLLBAR
+   Glassmorphic, minimal, on-hover reveal
+   ============================================================ */
+
+/* Dark mode scrollbar */
+.tasks-container::-webkit-scrollbar {
+    width: 6px !important;
+}
+
+.tasks-container::-webkit-scrollbar-track {
+    background: transparent !important;
+    margin: 8px 0 !important;
+}
+
+.tasks-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 100px !important;
+    transition: background 0.3s ease !important;
+}
+
+.tasks-container:hover::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.tasks-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(78, 159, 255, 0.4) !important;
+}
+
+.tasks-container::-webkit-scrollbar-thumb:active {
+    background: rgba(78, 159, 255, 0.6) !important;
+}
+
+/* Light mode scrollbar */
+[data-theme="light"] .tasks-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="light"] .tasks-container:hover::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12) !important;
+}
+
+[data-theme="light"] .tasks-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 112, 243, 0.3) !important;
+}
+
+[data-theme="light"] .tasks-container::-webkit-scrollbar-thumb:active {
+    background: rgba(0, 112, 243, 0.5) !important;
+}
+
+/* Firefox scrollbar */
+.tasks-container {
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent !important;
+}
+
+[data-theme="light"] .tasks-container {
+    scrollbar-color: rgba(0, 0, 0, 0.1) transparent !important;
+}
