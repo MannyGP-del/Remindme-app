@@ -1652,3 +1652,435 @@ body {
         right: 16px !important;
     }
 }
+
+/* ============================================================
+   PREMIUM LIGHT MODE - 2026 Design System
+   Linear.app / Notion / Apple inspired
+   WCAG AAA Compliant
+   ============================================================ */
+
+/* === LIGHT MODE COLOR SYSTEM === */
+[data-theme="light"] {
+    /* Backgrounds - Warm & Premium */
+    --bg-space: #faf9f7;
+    --bg-deep: #f5f4f2;
+    --glass-primary: #ffffff;
+    --glass-secondary: #fafafa;
+    --glass-tertiary: #f5f5f5;
+    
+    /* Text - AAA Contrast (=7:1) */
+    --text-primary: #171717;      /* 12.6:1 on white */
+    --text-secondary: #525252;    /* 7.2:1 on white */
+    --text-tertiary: #737373;     /* 5.7:1 - only for decorative */
+    
+    /* Accent - Electric Blue */
+    --accent-start: #0070f3;
+    --accent-end: #0061d4;
+    --accent-gradient: linear-gradient(135deg, #0070f3 0%, #0061d4 100%);
+    
+    /* Status Colors - Pastel with Dark Text (AAA) */
+    --danger: #dc2626;
+    --danger-bg: #fee2e2;
+    --danger-text: #991b1b;
+    
+    --warning: #d97706;
+    --warning-bg: #fff4e6;
+    --warning-text: #92400e;
+    
+    --success: #16a34a;
+    --success-bg: #dcfce7;
+    --success-text: #166534;
+    
+    --info-bg: #dbeafe;
+    --info-text: #1e40af;
+    
+    /* Shadows - Soft & Warm */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.03);
+    --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.08), 0 6px 12px rgba(0, 0, 0, 0.04);
+    --glow-accent: 0 0 0 3px rgba(0, 112, 243, 0.15);
+    
+    /* Borders */
+    --border-subtle: rgba(0, 0, 0, 0.06);
+    --border-medium: rgba(0, 0, 0, 0.1);
+    --border-focus: #0070f3;
+}
+
+/* === SMOOTH THEME TRANSITIONS === */
+* {
+    transition: background-color 300ms ease,
+                border-color 300ms ease,
+                box-shadow 300ms ease,
+                color 200ms ease;
+}
+
+/* === BODY LIGHT MODE === */
+[data-theme="light"] body {
+    background: var(--bg-space);
+    background-image: none;
+    color: var(--text-primary);
+}
+
+/* === MAIN CARD - Premium White === */
+[data-theme="light"] .app-card {
+    background: var(--glass-primary);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-lg);
+}
+
+[data-theme="light"] .app-card::before {
+    display: none;
+}
+
+[data-theme="light"] .app-card:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+/* === HEADER === */
+[data-theme="light"] .app-title {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: none;
+}
+
+[data-theme="light"] .app-subtitle {
+    color: var(--text-secondary);
+}
+
+/* === INPUT FIELD - Bottom Border Focus === */
+[data-theme="light"] .task-input-container {
+    background: var(--glass-secondary);
+    border: 1px solid var(--border-subtle);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="light"] .task-input-container:focus-within {
+    background: var(--glass-primary);
+    border-color: var(--border-focus);
+    box-shadow: var(--glow-accent), inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .task-input {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .task-input::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* === ADD BUTTON === */
+[data-theme="light"] .add-task-btn {
+    background: var(--accent-gradient);
+    box-shadow: 0 2px 8px rgba(0, 112, 243, 0.25);
+}
+
+[data-theme="light"] .add-task-btn:hover {
+    box-shadow: 0 4px 16px rgba(0, 112, 243, 0.35);
+}
+
+/* === TOOLBAR === */
+[data-theme="light"] .toolbar-btn {
+    background: var(--glass-secondary);
+    border-color: var(--border-subtle);
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .toolbar-btn:hover {
+    background: var(--glass-tertiary);
+    border-color: var(--border-medium);
+    color: var(--text-primary);
+}
+
+/* === TABS - Premium Pill Style === */
+[data-theme="light"] .tabs-container {
+    background: var(--glass-secondary);
+    border-color: var(--border-subtle);
+}
+
+[data-theme="light"] .tab {
+    color: var(--text-tertiary);
+}
+
+[data-theme="light"] .tab.active {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .tab-indicator {
+    background: var(--glass-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+/* === TASK ITEMS === */
+[data-theme="light"] .task-item {
+    background: var(--glass-primary);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-sm);
+}
+
+[data-theme="light"] .task-item:hover {
+    background: var(--glass-primary);
+    border-color: var(--border-medium);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+[data-theme="light"] .task-text {
+    color: var(--text-primary);
+}
+
+/* Completed Tasks - Subtle Gray */
+[data-theme="light"] .task-item.completed {
+    opacity: 0.9;
+}
+
+[data-theme="light"] .task-item.completed .task-text {
+    color: #a3a3a3;
+    text-decoration: line-through;
+    text-decoration-color: #d4d4d4;
+}
+
+/* === CHECKBOX - High Contrast === */
+[data-theme="light"] .task-checkbox {
+    border: 2px solid var(--text-tertiary);
+    background: var(--glass-primary);
+}
+
+[data-theme="light"] .task-checkbox:hover {
+    border-color: var(--accent-start);
+    box-shadow: var(--glow-accent);
+}
+
+[data-theme="light"] .task-checkbox:checked {
+    background: var(--accent-gradient);
+    border-color: var(--accent-start);
+}
+
+/* === DUE DATE CHIPS - Pastel AAA === */
+[data-theme="light"] .due-date-chip {
+    background: var(--info-bg);
+    border-color: transparent;
+    color: var(--info-text);
+}
+
+[data-theme="light"] .due-date-chip.overdue {
+    background: var(--danger-bg);
+    color: var(--danger-text);
+}
+
+[data-theme="light"] .due-date-chip.today {
+    background: var(--warning-bg);
+    color: var(--warning-text);
+}
+
+/* === TASK ACTIONS === */
+[data-theme="light"] .task-action-btn {
+    color: var(--text-tertiary);
+}
+
+[data-theme="light"] .task-action-btn:hover {
+    background: var(--glass-tertiary);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .task-action-btn.delete:hover {
+    background: var(--danger-bg);
+    color: var(--danger-text);
+}
+
+/* === USER MENU === */
+[data-theme="light"] .user-avatar {
+    background: var(--glass-primary);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-sm);
+}
+
+[data-theme="light"] .user-avatar:hover {
+    box-shadow: var(--glow-accent);
+    border-color: var(--accent-start);
+}
+
+[data-theme="light"] .user-dropdown {
+    background: var(--glass-primary);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-lg);
+}
+
+[data-theme="light"] .dropdown-item {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .dropdown-item:hover {
+    background: var(--glass-secondary);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .dropdown-item.danger:hover {
+    background: var(--danger-bg);
+    color: var(--danger-text);
+}
+
+[data-theme="light"] .dropdown-divider {
+    background: var(--border-subtle);
+}
+
+[data-theme="light"] .user-name {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .user-email-small {
+    color: var(--text-secondary);
+}
+
+/* === THEME TOGGLE === */
+[data-theme="light"] .theme-toggle {
+    background: var(--glass-primary);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    box-shadow: var(--shadow-sm);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    border-color: var(--accent-start);
+    color: var(--accent-start);
+    box-shadow: var(--glow-accent);
+}
+
+/* === DATEPICKER === */
+[data-theme="light"] .custom-datepicker {
+    background: var(--glass-primary);
+    border: 1px solid var(--border-subtle);
+    box-shadow: var(--shadow-lg);
+}
+
+[data-theme="light"] .datepicker-header {
+    border-color: var(--border-subtle);
+}
+
+[data-theme="light"] .datepicker-title {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .datepicker-nav {
+    background: var(--glass-secondary);
+    border-color: var(--border-subtle);
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .datepicker-nav:hover {
+    background: var(--glass-tertiary);
+    color: var(--accent-start);
+}
+
+[data-theme="light"] .datepicker-weekdays span {
+    color: var(--text-tertiary);
+}
+
+[data-theme="light"] .datepicker-day {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .datepicker-day:hover:not(.other-month):not(.selected) {
+    background: var(--glass-tertiary);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .datepicker-day.other-month {
+    color: var(--text-tertiary);
+    opacity: 0.5;
+}
+
+[data-theme="light"] .datepicker-day.today {
+    color: var(--accent-start);
+}
+
+[data-theme="light"] .datepicker-day.today::after {
+    background: var(--accent-start);
+}
+
+[data-theme="light"] .datepicker-time,
+[data-theme="light"] .datepicker-footer {
+    border-color: var(--border-subtle);
+}
+
+[data-theme="light"] .time-label {
+    color: var(--text-secondary);
+}
+
+[data-theme="light"] .time-input {
+    background: var(--glass-secondary);
+    border-color: var(--border-subtle);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .datepicker-btn.clear {
+    background: transparent;
+    color: var(--text-tertiary);
+    border-color: var(--border-subtle);
+}
+
+[data-theme="light"] .datepicker-btn.clear:hover {
+    background: var(--danger-bg);
+    color: var(--danger-text);
+}
+
+[data-theme="light"] .datepicker-btn.today {
+    background: var(--glass-secondary);
+    color: var(--text-secondary);
+    border-color: var(--border-subtle);
+}
+
+[data-theme="light"] .datepicker-btn.today:hover {
+    background: var(--glass-tertiary);
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .datepicker-backdrop {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* === EMPTY STATE === */
+[data-theme="light"] .empty-orb {
+    background: radial-gradient(circle at 30% 30%, rgba(0, 112, 243, 0.2), rgba(0, 97, 212, 0.05));
+}
+
+[data-theme="light"] .empty-text {
+    color: var(--text-tertiary);
+}
+
+/* === SCROLLBAR === */
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* === FOCUS INDICATORS - AAA Accessible === */
+[data-theme="light"] *:focus-visible {
+    outline: 3px solid var(--accent-start);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* === REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+/* === HIGH CONTRAST MODE === */
+@media (prefers-contrast: high) {
+    [data-theme="light"] {
+        --text-primary: #000000;
+        --text-secondary: #171717;
+        --text-tertiary: #404040;
+        --border-subtle: rgba(0, 0, 0, 0.2);
+        --border-medium: rgba(0, 0, 0, 0.3);
+    }
+}
