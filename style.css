@@ -1229,3 +1229,41 @@ body {
 .tab-indicator {
     left: 0 !important;
 }
+
+/* ===== Mobile Optimization - Native App Feel ===== */
+@media (max-width: 640px) {
+    .app-card {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: var(--space-4) !important;
+    }
+    
+    .main-container {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+    
+    .app-wrapper {
+        padding: 0 !important;
+        min-height: 100vh;
+    }
+    
+    .app-header {
+        padding-top: var(--space-8);
+    }
+    
+    /* Full-width task input on mobile */
+    .task-input-container {
+        border-radius: var(--radius-md) !important;
+    }
+    
+    /* Slightly rounded task items */
+    .task-item {
+        border-radius: var(--radius-md) !important;
+        margin: 0 var(--space-2);
+    }
+}
