@@ -1351,3 +1351,304 @@ body {
         right: var(--space-4) !important;
     }
 }
+
+/* ============================================================
+   PIXEL-PERFECT ALIGNMENT SYSTEM
+   Linear.app / Notion / Things 3 inspired precision
+   ============================================================ */
+
+/* === DESIGN TOKENS: 8px Grid System === */
+:root {
+    /* Unified Border Radius (NO exceptions) */
+    --radius-container: 16px;  /* Primary containers */
+    --radius-pill: 12px;       /* Chips, small pills */
+    
+    /* 8px Grid Spacing */
+    --grid-1: 8px;
+    --grid-2: 16px;
+    --grid-3: 24px;
+    --grid-4: 32px;
+    --grid-5: 40px;
+    --grid-6: 48px;
+    
+    /* Container Padding */
+    --padding-card: 24px;
+    --padding-card-mobile: 20px;
+    --padding-item: 20px;
+    
+    /* Task List Spacing */
+    --task-gap: 12px;
+    
+    /* Line Height (1.5x minimum) */
+    --lh-tight: 1.5;
+    --lh-normal: 1.6;
+}
+
+/* === MAIN CARD: Unified Container === */
+.app-card {
+    border-radius: var(--radius-container) !important;
+    padding: var(--padding-card) !important;
+}
+
+/* === TASK INPUT: Sibling to Task Items === */
+.task-input-container {
+    border-radius: var(--radius-container) !important;
+    padding: var(--grid-1) var(--padding-item) !important;
+    min-height: 56px;
+}
+
+.task-input {
+    padding: var(--grid-2) 0 !important;
+    font-size: 15px;
+    line-height: var(--lh-normal);
+}
+
+/* === FILTER TABS: Match Container Radius === */
+.tabs-container {
+    border-radius: var(--radius-container) !important;
+    padding: 4px !important;
+}
+
+.tab {
+    padding: var(--grid-1) var(--grid-2) !important;
+    font-size: 14px;
+    line-height: var(--lh-tight);
+    border-radius: var(--radius-pill) !important;
+}
+
+.tab-indicator {
+    border-radius: var(--radius-pill) !important;
+    left: 0 !important;
+    top: 4px !important;
+    height: calc(100% - 8px) !important;
+}
+
+/* === TASK ITEMS: Perfect Alignment === */
+.task-list {
+    gap: var(--task-gap) !important;
+}
+
+.task-item {
+    border-radius: var(--radius-container) !important;
+    padding: var(--grid-2) var(--padding-item) !important;
+    gap: var(--grid-2) !important;
+    align-items: center !important;
+    min-height: 64px;
+}
+
+/* Checkbox: Perfect vertical center */
+.task-checkbox {
+    width: 22px !important;
+    height: 22px !important;
+    border-radius: 6px !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+}
+
+/* Task Content: Baseline aligned */
+.task-content {
+    gap: 6px !important;
+    justify-content: center !important;
+}
+
+.task-text {
+    font-size: 15px !important;
+    line-height: var(--lh-tight) !important;
+    font-weight: 600 !important;
+}
+
+/* === DUE DATE CHIPS: 12px Radius Pills === */
+.due-date-chip {
+    border-radius: var(--radius-pill) !important;
+    padding: 4px var(--grid-1) !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    line-height: var(--lh-tight) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+}
+
+/* Task Actions: Aligned right */
+.task-actions {
+    gap: var(--grid-1) !important;
+    margin-left: auto !important;
+    flex-shrink: 0 !important;
+}
+
+.task-action-btn {
+    width: var(--grid-4) !important;
+    height: var(--grid-4) !important;
+    border-radius: var(--grid-1) !important;
+}
+
+/* === USER AVATAR: 36px as specified === */
+.user-avatar {
+    width: 36px !important;
+    height: 36px !important;
+}
+
+.avatar-letter {
+    font-size: 14px !important;
+}
+
+/* === HEADER: Perfect Spacing === */
+.app-header {
+    margin-bottom: var(--grid-3) !important;
+}
+
+.app-title {
+    line-height: var(--lh-tight) !important;
+    margin-bottom: var(--grid-1) !important;
+}
+
+.app-subtitle {
+    line-height: var(--lh-normal) !important;
+}
+
+/* === SECTION SPACING: 8px Grid === */
+.task-input-wrapper {
+    margin-bottom: var(--grid-2) !important;
+}
+
+.filter-tabs {
+    margin-bottom: var(--grid-2) !important;
+}
+
+.tasks-container {
+    margin-top: var(--grid-1) !important;
+}
+
+/* === TOOLBAR: Aligned with Grid === */
+.toolbar-btn {
+    border-radius: var(--radius-pill) !important;
+    padding: var(--grid-1) var(--grid-2) !important;
+    gap: var(--grid-1) !important;
+    font-size: 13px !important;
+}
+
+/* === DROPDOWNS: Unified Radius === */
+.user-dropdown {
+    border-radius: var(--radius-container) !important;
+    padding: var(--grid-1) !important;
+}
+
+.dropdown-item {
+    border-radius: var(--radius-pill) !important;
+    padding: var(--grid-1) var(--grid-2) !important;
+    gap: var(--grid-1) !important;
+}
+
+/* === DATEPICKER: Unified System === */
+.custom-datepicker {
+    border-radius: var(--radius-container) !important;
+    padding: var(--grid-2) !important;
+}
+
+.datepicker-nav {
+    border-radius: var(--grid-1) !important;
+}
+
+.datepicker-day {
+    border-radius: var(--grid-1) !important;
+}
+
+.datepicker-btn {
+    border-radius: var(--radius-pill) !important;
+    padding: var(--grid-1) var(--grid-2) !important;
+}
+
+.time-input {
+    border-radius: var(--radius-pill) !important;
+    padding: var(--grid-1) var(--grid-2) !important;
+}
+
+/* === MOBILE: Adjusted Grid === */
+@media (max-width: 640px) {
+    .app-card {
+        padding: 0 var(--padding-card-mobile) !important;
+    }
+    
+    .task-item {
+        padding: var(--grid-2) var(--grid-2) !important;
+    }
+    
+    .task-input-container {
+        padding: var(--grid-1) var(--grid-2) !important;
+    }
+    
+    .task-checkbox {
+        width: 20px !important;
+        height: 20px !important;
+    }
+    
+    .app-title {
+        font-size: 24px !important;
+    }
+}
+
+/* ============================================================
+   EDGE ALIGNMENT FIX - Perfect Horizontal Alignment
+   All containers share the same left/right edges
+   ============================================================ */
+
+/* On mobile, remove all extra padding/margins and align to screen edges */
+@media (max-width: 640px) {
+    /* Base padding for the card content area */
+    .app-card {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+    
+    /* Input bar - full width within card padding */
+    .task-input-container {
+        margin: 0 !important;
+        width: 100% !important;
+    }
+    
+    /* Toolbar - align with input */
+    .task-toolbar {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .toolbar-btn {
+        margin-left: 0 !important;
+    }
+    
+    /* Tabs container - full width */
+    .filter-tabs {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    .tabs-container {
+        width: 100% !important;
+    }
+    
+    /* Task items - full width, no extra margin */
+    .task-list {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .task-item {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+    }
+    
+    /* Header - center aligned */
+    .app-header {
+        text-align: center !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    
+    /* User menu - align with right edge */
+    .user-menu-wrapper {
+        right: 16px !important;
+    }
+}
