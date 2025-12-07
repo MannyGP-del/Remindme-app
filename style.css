@@ -2084,3 +2084,74 @@ body {
         --border-medium: rgba(0, 0, 0, 0.3);
     }
 }
+
+/* ============================================================
+   LIGHT MODE FIXES - Pure Warm Whites & Subtle Focus
+   ============================================================ */
+
+/* Override: Pure Warm White Colors (NO blue tint) */
+[data-theme="light"] {
+    --bg-space: #fdfdfd !important;        /* Pure warm white */
+    --bg-deep: #faf9f7 !important;         /* Soft linen */
+    --glass-primary: #ffffff !important;   /* True white */
+    --glass-secondary: #fafaf9 !important; /* Warm off-white */
+    --glass-tertiary: #f5f5f3 !important;  /* Warm light gray */
+}
+
+/* Fix: Remove harsh blue focus outline on input */
+[data-theme="light"] .task-input-container:focus-within {
+    border-color: rgba(0, 112, 243, 0.3) !important;
+    box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.08) !important;
+}
+
+/* Fix: Remove outline from input itself */
+[data-theme="light"] .task-input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Fix: Subtle focus for the container */
+[data-theme="light"] .task-input-container {
+    transition: border-color 200ms ease, box-shadow 200ms ease !important;
+}
+
+/* Fix: Remove global focus-visible outline on input */
+[data-theme="light"] .task-input:focus-visible {
+    outline: none !important;
+}
+
+/* Fix: Cards - pure warm white with NO blue shadows */
+[data-theme="light"] .app-card {
+    background: #ffffff !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04) !important;
+}
+
+[data-theme="light"] .app-card:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Fix: Task items - warm shadows */
+[data-theme="light"] .task-item {
+    background: #ffffff !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03) !important;
+}
+
+[data-theme="light"] .task-item:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Fix: Tabs - warm white indicator */
+[data-theme="light"] .tabs-container {
+    background: #f5f5f3 !important;
+}
+
+[data-theme="light"] .tab-indicator {
+    background: #ffffff !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Fix: Due date chip - softer blue */
+[data-theme="light"] .due-date-chip {
+    background: #eff6ff !important;
+    color: #1d4ed8 !important;
+}
