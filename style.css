@@ -2155,3 +2155,93 @@ body {
     background: #eff6ff !important;
     color: #1d4ed8 !important;
 }
+
+/* Fix: Remove any bottom gradient/line artifacts in light mode */
+[data-theme="light"] body {
+    background: #fdfdfd !important;
+    background-image: none !important;
+}
+
+[data-theme="light"] body::before,
+[data-theme="light"] body::after {
+    display: none !important;
+}
+
+[data-theme="light"] .app-wrapper {
+    background: transparent !important;
+}
+
+[data-theme="light"] .app-wrapper::before,
+[data-theme="light"] .app-wrapper::after {
+    display: none !important;
+}
+
+/* Remove any gradient overlays */
+[data-theme="light"] .main-container::before,
+[data-theme="light"] .main-container::after {
+    display: none !important;
+}
+
+/* Fix: Completely remove app-card visual on mobile for BOTH themes */
+@media (max-width: 640px) {
+    .app-card {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+    
+    .app-card::before {
+        display: none !important;
+    }
+    
+    [data-theme="light"] .app-card {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Make body full height with no gaps */
+    html, body {
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+    
+    body {
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+    
+    [data-theme="light"] body {
+        background: #fdfdfd !important;
+    }
+    
+    .app-wrapper {
+        min-height: 100vh !important;
+        min-height: -webkit-fill-available !important;
+    }
+}
+
+/* Fix: User avatar - edge glow only (like theme toggle) */
+[data-theme="light"] .user-avatar:hover,
+[data-theme="light"] .user-avatar:focus {
+    box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.15) !important;
+    border-color: rgba(0, 112, 243, 0.4) !important;
+}
+
+.user-avatar:hover,
+.user-avatar:focus {
+    box-shadow: 0 0 0 2px rgba(78, 159, 255, 0.2) !important;
+    border-color: rgba(78, 159, 255, 0.5) !important;
+}
+
+/* Remove the inner glow effect */
+.user-avatar:hover .avatar-ring,
+.user-avatar:focus .avatar-ring {
+    opacity: 0 !important;
+}
+
+[data-theme="light"] .user-avatar:hover .avatar-ring,
+[data-theme="light"] .user-avatar:focus .avatar-ring {
+    opacity: 0 !important;
+}
