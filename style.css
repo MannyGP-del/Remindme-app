@@ -1267,3 +1267,87 @@ body {
         margin: 0 var(--space-2);
     }
 }
+
+/* Move content up - title at top like mobile app */
+@media (max-width: 640px) {
+    .app-header {
+        padding-top: var(--space-4) !important;
+        margin-bottom: var(--space-4) !important;
+    }
+    
+    .app-title {
+        font-size: 24px !important;
+        margin-bottom: var(--space-1) !important;
+    }
+    
+    .app-subtitle {
+        font-size: 13px !important;
+        margin-bottom: 0 !important;
+    }
+    
+    /* User menu in top corner */
+    .user-menu-wrapper {
+        top: var(--space-3) !important;
+        right: var(--space-3) !important;
+    }
+    
+    /* Reduce overall vertical spacing */
+    .task-input-wrapper {
+        margin-bottom: var(--space-3) !important;
+    }
+    
+    .filter-tabs {
+        margin-bottom: var(--space-2) !important;
+    }
+    
+    .tasks-container {
+        margin-top: var(--space-2) !important;
+    }
+}
+
+/* ===== Mobile App-like Layout - Align to Top ===== */
+@media (max-width: 640px) {
+    .app-wrapper {
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        padding: 0 !important;
+        padding-top: var(--space-3) !important;
+    }
+    
+    .app-card {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 var(--space-4) !important;
+    }
+    
+    .app-card::before {
+        display: none !important;
+    }
+    
+    .app-header {
+        padding-top: 0 !important;
+        margin-bottom: var(--space-5) !important;
+    }
+    
+    .app-title {
+        font-size: 26px !important;
+    }
+    
+    .app-subtitle {
+        font-size: 13px !important;
+    }
+    
+    .main-container {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .user-menu-wrapper {
+        top: var(--space-3) !important;
+        right: var(--space-4) !important;
+    }
+}
