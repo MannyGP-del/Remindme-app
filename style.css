@@ -2470,3 +2470,26 @@ body {
     outline: 2px solid var(--accent-start) !important;
     outline-offset: 2px !important;
 }
+
+/* ============================================================
+   UNIFIED HEADER BUTTONS - Same size and radius
+   ============================================================ */
+
+/* Both buttons: 36px, fully rounded */
+.theme-toggle,
+.user-avatar {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+}
+
+/* Icon size consistency */
+.theme-toggle svg {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.avatar-letter {
+    font-size: 14px !important;
+}
