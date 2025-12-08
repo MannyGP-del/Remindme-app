@@ -60,7 +60,11 @@ async function checkAuth() {
     currentUser = session.user;
     initializeUser();
     await loadTodos();
+
+    // Initialize notifications after app is loaded
+    initNotificationsDelayed();
 }
+
 
 function initializeUser() {
     const email = currentUser.email;
@@ -664,3 +668,153 @@ window.addEventListener('resize', () => {
         updateTabIndicator(index, false);
     }
 });
+
+// ============================================================
+// PUSH NOTIFICATIONS
+// ============================================================
+
+let notificationPermission = 'default';
+let swRegistration = null;
+
+// Initialize notifications after a delay
+function initNotificationsDelayed() {
+    if (localStorage.getItem('notification-dismissed')) return;
+    setTimeout(initializeNotifications, 2000);
+}
+
+// Initialize notifications
+async function initializeNotifications() {
+    if (!('Notification' in window)) {
+        console.log('Notifications not supported');
+        return;
+    }
+
+    notificationPermission = Notification.permission;
+
+    if ('serviceWorker' in navigator) {
+        try {
+            swRegistration = await navigator.serviceWorker.register('./sw.js');
+            console.log('Service Worker registered');
+            navigator.serviceWorker.addEventListener('message', handleSWMessage);
+        } catch (error) {
+            console.error('Service Worker registration failed:', error);
+        }
+    }
+
+    if (notificationPermission === 'default') {
+        showNotificationPrompt();
+    } else if (notificationPermission === 'granted') {
+        startNotificationScheduler();
+    }
+}
+
+// Show notification permission prompt
+function showNotificationPrompt() {
+    var promptBanner = document.createElement('div');
+    promptBanner.id = 'notification-prompt';
+    promptBanner.innerHTML = '<div class="notification-prompt-content">' +
+        '<span class="notification-prompt-icon">🔔</span>' +
+        '<div class="notification-prompt-text">' +
+        '<strong>Enable Reminders</strong>' +
+        '<p>Get notified when your tasks are due</p>' +
+        '</div>' +
+        '<div class="notification-prompt-buttons">' +
+        '<button id="notification-deny">Not now</button>' +
+        '<button id="notification-allow">Enable</button>' +
+        '</div></div>';
+    document.body.appendChild(promptBanner);
+
+    document.getElementById('notification-allow').addEventListener('click', async function () {
+        promptBanner.remove();
+        var permission = await Notification.requestPermission();
+        notificationPermission = permission;
+
+        if (permission === 'granted') {
+            startNotificationScheduler();
+            showToast('Notifications enabled!');
+        }
+    });
+
+    document.getElementById('notification-deny').addEventListener('click', function () {
+        promptBanner.remove();
+        localStorage.setItem('notification-dismissed', 'true');
+    });
+}
+
+// Start the notification scheduler
+function startNotificationScheduler() {
+    checkDueTasksForNotification();
+    setInterval(checkDueTasksForNotification, 60000);
+}
+
+// Check for due tasks and send notifications
+function checkDueTasksForNotification() {
+    if (notificationPermission !== 'granted') return;
+
+    var now = new Date();
+
+    todos.forEach(function (task) {
+        if (task.completed || !task.reminder) return;
+
+        var dueDate = new Date(task.reminder);
+        var timeDiff = dueDate - now;
+        var notifiedKey = 'notified-' + task.id;
+        var notifiedFor = localStorage.getItem(notifiedKey);
+
+        if (timeDiff <= 900000 && timeDiff > 0 && notifiedFor !== '15min') {
+            showTaskNotification(task, 'Due in 15 minutes');
+            localStorage.setItem(notifiedKey, '15min');
+        }
+
+        if (timeDiff <= 60000 && timeDiff > -60000 && notifiedFor !== 'due') {
+            showTaskNotification(task, 'Due now!');
+            localStorage.setItem(notifiedKey, 'due');
+        }
+
+        if (timeDiff < -60000 && timeDiff > -120000 && notifiedFor !== 'overdue') {
+            showTaskNotification(task, 'Overdue!');
+            localStorage.setItem(notifiedKey, 'overdue');
+        }
+    });
+}
+
+// Show a notification for a task
+function showTaskNotification(task, status) {
+    var notification = new Notification('Task ' + status, {
+        body: task.text,
+        icon: './icon-192.png',
+        tag: 'task-' + task.id,
+        renotify: true,
+        requireInteraction: true
+    });
+
+    notification.onclick = function () {
+        window.focus();
+        notification.close();
+    };
+}
+
+// Show toast message
+function showToast(message) {
+    var toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    setTimeout(function () {
+        toast.classList.add('visible');
+    }, 10);
+
+    setTimeout(function () {
+        toast.classList.remove('visible');
+        setTimeout(function () { toast.remove(); }, 300);
+    }, 3000);
+}
+
+// Handle messages from service worker
+function handleSWMessage(event) {
+    if (event.data && event.data.type === 'COMPLETE_TASK') {
+        toggleTodo(event.data.taskId);
+    }
+}
+
