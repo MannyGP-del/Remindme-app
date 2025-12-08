@@ -2493,3 +2493,52 @@ body {
 .avatar-letter {
     font-size: 14px !important;
 }
+
+/* ============================================================
+   COLORED TASK ACTION BUTTONS - Always styled
+   ============================================================ */
+
+/* Delete button - always red */
+.task-action-btn.delete {
+    background: rgba(255, 71, 87, 0.12) !important;
+    color: #ff4757 !important;
+    opacity: 1 !important;
+}
+
+.task-action-btn.delete:hover {
+    background: rgba(255, 71, 87, 0.25) !important;
+    color: #ff4757 !important;
+}
+
+/* Calendar button - always blue */
+.task-action-btn.calendar {
+    background: rgba(78, 159, 255, 0.12) !important;
+    color: #4e9fff !important;
+    opacity: 1 !important;
+}
+
+.task-action-btn.calendar:hover {
+    background: rgba(78, 159, 255, 0.25) !important;
+    color: #4e9fff !important;
+}
+
+/* Light mode */
+[data-theme="light"] .task-action-btn.delete {
+    background: #fee2e2 !important;
+    color: #dc2626 !important;
+}
+
+[data-theme="light"] .task-action-btn.delete:hover {
+    background: #fecaca !important;
+    color: #b91c1c !important;
+}
+
+[data-theme="light"] .task-action-btn.calendar {
+    background: #dbeafe !important;
+    color: #2563eb !important;
+}
+
+[data-theme="light"] .task-action-btn.calendar:hover {
+    background: #bfdbfe !important;
+    color: #1d4ed8 !important;
+}
