@@ -2440,3 +2440,33 @@ body {
     background: var(--info-bg) !important;
     color: var(--info-text) !important;
 }
+
+/* Fix: Theme toggle - remove persistent focus glow after click */
+.theme-toggle:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--accent-start) !important;
+    outline-offset: 2px !important;
+}
+
+.theme-toggle:active {
+    transform: scale(0.95) !important;
+}
+
+/* Quick transition for removing glow */
+.theme-toggle {
+    transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.15s ease !important;
+}
+
+[data-theme="light"] .theme-toggle:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+[data-theme="light"] .theme-toggle:focus-visible {
+    outline: 2px solid var(--accent-start) !important;
+    outline-offset: 2px !important;
+}
