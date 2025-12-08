@@ -779,20 +779,39 @@ function checkDueTasksForNotification() {
 }
 
 // Show a notification for a task
+// Show a notification for a task
 function showTaskNotification(task, status) {
-    var notification = new Notification('Task ' + status, {
+    var title = 'Task ' + status;
+    var options = {
         body: task.text,
         icon: './icon-192.png',
         tag: 'task-' + task.id,
-        renotify: true,
-        requireInteraction: true
-    });
-
-    notification.onclick = function () {
-        window.focus();
-        notification.close();
+        renotify: true
     };
+
+    // Safety check for vibration
+    try {
+        if ('vibrate' in navigator) {
+            options.vibrate = [200, 100, 200];
+        }
+    } catch (e) { }
+
+    // Try to show notification
+    try {
+        if (swRegistration && 'showNotification' in swRegistration) {
+            swRegistration.showNotification(title, options);
+        } else {
+            var notification = new Notification(title, options);
+            notification.onclick = function () {
+                window.focus();
+                notification.close();
+            };
+        }
+    } catch (error) {
+        console.error('Error showing notification:', error);
+    }
 }
+
 
 // Show toast message
 function showToast(message) {
