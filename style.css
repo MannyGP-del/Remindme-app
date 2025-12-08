@@ -2378,3 +2378,65 @@ body {
 [data-theme="light"] .tasks-container {
     scrollbar-color: rgba(0, 0, 0, 0.1) transparent !important;
 }
+
+/* ============================================================
+   ALWAYS VISIBLE TASK ACTIONS
+   Delete button always visible, calendar on dated tasks
+   ============================================================ */
+
+/* Make task actions always visible */
+.task-actions {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+}
+
+/* Style the action buttons for always-on state */
+.task-action-btn {
+    opacity: 0.6 !important;
+    transition: opacity 0.2s, background 0.2s, color 0.2s !important;
+}
+
+.task-action-btn:hover {
+    opacity: 1 !important;
+}
+
+/* Delete button styling */
+.task-action-btn.delete {
+    opacity: 0.5 !important;
+}
+
+.task-action-btn.delete:hover {
+    opacity: 1 !important;
+    background: rgba(255, 71, 87, 0.15) !important;
+    color: var(--danger) !important;
+}
+
+/* Calendar button styling */
+.task-action-btn.calendar {
+    opacity: 0.5 !important;
+}
+
+.task-action-btn.calendar:hover {
+    opacity: 1 !important;
+    background: rgba(78, 159, 255, 0.15) !important;
+    color: var(--accent-start) !important;
+}
+
+/* Light mode adjustments */
+[data-theme="light"] .task-action-btn {
+    opacity: 0.5 !important;
+}
+
+[data-theme="light"] .task-action-btn:hover {
+    opacity: 1 !important;
+}
+
+[data-theme="light"] .task-action-btn.delete:hover {
+    background: var(--danger-bg) !important;
+    color: var(--danger-text) !important;
+}
+
+[data-theme="light"] .task-action-btn.calendar:hover {
+    background: var(--info-bg) !important;
+    color: var(--info-text) !important;
+}
