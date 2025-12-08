@@ -2622,3 +2622,35 @@ body {
     outline: none !important;
     box-shadow: none !important;
 }
+
+/* ============================================================
+   FIX: Remove tap highlight on tabs and all buttons
+   ============================================================ */
+
+.tab,
+.tabs-container,
+.toolbar-btn,
+.add-task-btn,
+.task-action-btn,
+.task-checkbox,
+.dropdown-item,
+.datepicker-btn,
+.datepicker-nav,
+.datepicker-day,
+button {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+}
+
+.tab:focus,
+.tab:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Remove any quick flash on mobile */
+@media (max-width: 640px) {
+    * {
+        -webkit-tap-highlight-color: transparent !important;
+    }
+}
