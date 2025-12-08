@@ -2542,3 +2542,83 @@ body {
     background: #bfdbfe !important;
     color: #1d4ed8 !important;
 }
+
+/* ============================================================
+   FIX: Remove ALL persistent glow on theme toggle
+   ============================================================ */
+
+.theme-toggle,
+.theme-toggle:focus,
+.theme-toggle:active,
+.theme-toggle:visited {
+    outline: none !important;
+    box-shadow: none !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+.theme-toggle:hover {
+    border-color: rgba(0, 112, 243, 0.3) !important;
+}
+
+[data-theme="light"] .theme-toggle,
+[data-theme="light"] .theme-toggle:focus,
+[data-theme="light"] .theme-toggle:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    background: #ffffff !important;
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    border-color: rgba(0, 112, 243, 0.3) !important;
+}
+
+/* Only show focus for keyboard navigation */
+.theme-toggle:focus-visible {
+    outline: 2px solid #0070f3 !important;
+    outline-offset: 2px !important;
+}
+
+/* ============================================================
+   FIX: Remove glow on mobile/touch devices
+   ============================================================ */
+
+/* Remove tap highlight on mobile */
+.theme-toggle {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+}
+
+/* Remove ALL focus/active styles aggressively */
+.theme-toggle:focus,
+.theme-toggle:focus-within,
+.theme-toggle:active,
+.theme-toggle:target {
+    outline: 0 !important;
+    outline-style: none !important;
+    box-shadow: none !important;
+}
+
+/* Mobile specific */
+@media (max-width: 640px) {
+    .theme-toggle,
+    .theme-toggle:focus,
+    .theme-toggle:active {
+        outline: none !important;
+        box-shadow: none !important;
+        -webkit-appearance: none !important;
+    }
+}
+
+/* Also fix user avatar for consistency */
+.user-avatar {
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+.user-avatar:focus,
+.user-avatar:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
