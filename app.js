@@ -283,6 +283,7 @@ clearDateBtn.addEventListener('click', (e) => {
 });
 
 // Confirm button
+// Confirm button
 confirmDateBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (selectedDate) {
@@ -296,9 +297,21 @@ confirmDateBtn.addEventListener('click', (e) => {
         selectedDateText.textContent = formatDateShort(finalDate);
         datePickerBtn.style.borderColor = 'rgba(78, 159, 255, 0.4)';
         datePickerBtn.style.color = 'var(--accent-start)';
+
+        closeDatepicker();
+
+        // Auto-add task if text exists
+        if (taskInput.value.trim().length > 0) {
+            addTask();
+        } else {
+            // Focus input if no text yet
+            taskInput.focus();
+        }
+    } else {
+        closeDatepicker();
     }
-    closeDatepicker();
 });
+
 
 function formatDateShort(date) {
     const today = new Date();
