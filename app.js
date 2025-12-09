@@ -646,13 +646,15 @@ function formatDateForChip(date) {
     tomorrow.setDate(tomorrow.getDate() + 1);
 
     const taskDate = new Date(date);
+    const timeString = taskDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
 
     if (taskDate.toDateString() === today.toDateString()) {
-        return 'Today';
+        return `Today, ${timeString}`;
     } else if (taskDate.toDateString() === tomorrow.toDateString()) {
-        return 'Tomorrow';
+        return `Tomorrow, ${timeString}`;
     } else {
-        return taskDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        const dateString = taskDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        return `${dateString}, ${timeString}`;
     }
 }
 
