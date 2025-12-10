@@ -2735,7 +2735,7 @@ button {
     top: 0;
     left: 0;
     width: 100%;
-    height: env(safe-area-inset-top, 20px);
+    height: max(env(safe-area-inset-top, 20px), 20px);
     background: var(--bar-bg);
     box-shadow: var(--bar-shadow);
     z-index: 1000;
@@ -2746,7 +2746,7 @@ button {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: env(safe-area-inset-bottom, 20px);
+    height: max(env(safe-area-inset-bottom, 20px), 20px);
     background: var(--bar-bg);
     box-shadow: var(--bar-shadow);
     z-index: 1000;
