@@ -7,10 +7,6 @@
     --glass-secondary: rgba(40, 40, 60, 0.5);
     --glass-tertiary: rgba(50, 50, 70, 0.3);
 
-    /* Top and Bottom Bar Colors */
-    --bar-bg: var(--bg-deep);
-    --bar-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
-
     /* Electric Blue Gradient */
     --accent-start: #4e9fff;
     --accent-end: #00d4ff;
@@ -2724,32 +2720,6 @@ button {
     * {
         -webkit-tap-highlight-color: transparent !important;
     }
-}
-
-/* ============================================================
-   TOP AND BOTTOM BARS FOR MOBILE VIEW
-   ============================================================ */
-
-.top-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: max(env(safe-area-inset-top, 20px), 20px);
-    background: var(--bar-bg);
-    box-shadow: var(--bar-shadow);
-    z-index: 1000;
-}
-
-.bottom-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: max(env(safe-area-inset-bottom, 20px), 20px);
-    background: var(--bar-bg);
-    box-shadow: var(--bar-shadow);
-    z-index: 1000;
 }
 
 /* ============================================================
