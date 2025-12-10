@@ -496,6 +496,69 @@ body {
     box-shadow: var(--shadow-md);
 }
 
+/* Overdue tasks - Premium styling */
+.task-item.overdue {
+    position: relative;
+    background: linear-gradient(90deg, rgba(255, 71, 87, 0.12) 0%, rgba(40, 40, 60, 0.5) 20%);
+    border: 1px solid rgba(255, 71, 87, 0.2);
+    box-shadow: 0 2px 12px rgba(255, 71, 87, 0.15);
+}
+
+.task-item.overdue::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--danger), #ff6b7d);
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+}
+
+.task-item.overdue:hover {
+    background: linear-gradient(90deg, rgba(255, 71, 87, 0.18) 0%, rgba(50, 50, 70, 0.5) 20%);
+    border-color: rgba(255, 71, 87, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(255, 71, 87, 0.2);
+}
+
+.task-item.overdue .task-text {
+    color: #ff8a94;
+    font-weight: 600;
+}
+
+.task-item.overdue .due-date-chip.overdue {
+    background: rgba(255, 71, 87, 0.25);
+    border-color: rgba(255, 71, 87, 0.4);
+    color: #ffd1d5;
+    font-weight: 600;
+}
+
+/* Light theme overdue styles */
+[data-theme="light"] .task-item.overdue {
+    background: linear-gradient(90deg, var(--danger-bg) 0%, var(--glass-secondary) 20%);
+    border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+[data-theme="light"] .task-item.overdue::before {
+    background: linear-gradient(to bottom, var(--danger), #ef4444);
+}
+
+[data-theme="light"] .task-item.overdue:hover {
+    background: linear-gradient(90deg, #fee2e2 0%, var(--glass-secondary) 20%);
+    border-color: rgba(220, 38, 38, 0.3);
+}
+
+[data-theme="light"] .task-item.overdue .task-text {
+    color: var(--danger-text);
+}
+
+[data-theme="light"] .task-item.overdue .due-date-chip.overdue {
+    background: var(--danger-bg);
+    border-color: rgba(220, 38, 38, 0.3);
+    color: var(--danger-text);
+}
+
 .task-item.completed {
     opacity: 0.6;
 }
@@ -1998,6 +2061,10 @@ body {
 
 [data-theme="light"] .datepicker-day.today::after {
     background: var(--accent-start);
+}
+
+[data-theme="light"] .datepicker-day.selected {
+    color: #ffffff;
 }
 
 [data-theme="light"] .datepicker-time,
