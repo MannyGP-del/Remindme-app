@@ -403,6 +403,41 @@ body {
     flex-shrink: 0;
 }
 
+.cancel-edit-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 71, 87, 0.1);
+    border: 1px solid rgba(255, 71, 87, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--danger);
+    margin-right: var(--space-1);
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+    display: none; /* Hidden by display none initially */
+}
+
+.cancel-edit-btn.visible {
+    display: flex; /* Override display: none */
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: all;
+}
+
+.cancel-edit-btn:hover {
+    background: rgba(255, 71, 87, 0.2);
+    transform: scale(1.05);
+}
+
+.cancel-edit-btn:active {
+    transform: scale(0.95);
+}
+
 /* Hide the native date input but keep it accessible */
 .toolbar-btn input[type="datetime-local"] {
     position: absolute;

@@ -8,11 +8,13 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let todos = [];
 let filter = 'all';
 let currentUser = null;
+let editingId = null;
 
 // DOM Elements
 const taskInput = document.getElementById('task-input');
 const reminderInput = document.getElementById('reminder-input');
 const addTaskBtn = document.getElementById('add-task-btn');
+const cancelEditBtn = document.getElementById('cancel-edit-btn');
 const taskToolbar = document.getElementById('task-toolbar');
 const datePickerBtn = document.getElementById('date-picker-btn');
 const selectedDateText = document.getElementById('selected-date-text');
@@ -117,10 +119,77 @@ function updateAddButtonVisibility() {
     if (hasText) {
         addTaskBtn.classList.remove('hidden');
         addTaskBtn.classList.add('visible');
-    } else {
+    } else if (!editingId) { // Only hide if not editing
         addTaskBtn.classList.add('hidden');
         addTaskBtn.classList.remove('visible');
     }
+}
+
+// Cancel Edit
+cancelEditBtn.addEventListener('click', cancelEdit);
+
+function cancelEdit() {
+    editingId = null;
+    taskInput.value = '';
+    reminderInput.value = '';
+    selectedDateText.textContent = 'Due date';
+    datePickerBtn.style.borderColor = '';
+    datePickerBtn.style.color = '';
+
+    cancelEditBtn.classList.remove('visible');
+    cancelEditBtn.classList.add('hidden');
+
+    // Reset Add Button icon
+    addTaskBtn.innerHTML = `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+    `;
+
+    updateAddButtonVisibility();
+    taskToolbar.classList.add('hidden');
+    taskToolbar.classList.remove('visible');
+}
+
+function editTodo(id) {
+    const todo = todos.find(t => t.id === id);
+    if (!todo) return;
+
+    editingId = id;
+    taskInput.value = todo.text;
+
+    if (todo.reminder) {
+        const date = new Date(todo.reminder);
+        reminderInput.value = todo.reminder;
+        selectedDateText.textContent = formatDateShort(date);
+        datePickerBtn.style.borderColor = 'rgba(78, 159, 255, 0.4)';
+        datePickerBtn.style.color = 'var(--accent-start)';
+    } else {
+        reminderInput.value = '';
+        selectedDateText.textContent = 'Due date';
+        datePickerBtn.style.borderColor = '';
+        datePickerBtn.style.color = '';
+    }
+
+    // Show cancel button
+    cancelEditBtn.classList.remove('hidden');
+    cancelEditBtn.classList.add('visible');
+
+    // Change Add Button to Save
+    addTaskBtn.innerHTML = `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+    `;
+    addTaskBtn.classList.remove('hidden');
+    addTaskBtn.classList.add('visible');
+
+    // Show toolbar
+    taskToolbar.classList.remove('hidden');
+    taskToolbar.classList.add('visible');
+
+    taskInput.focus();
 }
 
 // Custom Date Picker
@@ -328,45 +397,67 @@ function formatDateShort(date) {
 }
 
 // Add Task
+// Add or Update Task
 async function addTask() {
     const text = taskInput.value.trim();
     const reminder = reminderInput.value;
 
     if (!text) return;
 
-    const newTodo = {
-        id: null,
-        text,
-        reminder,
-        completed: false,
-        createdAt: new Date().toISOString()
-    };
+    if (editingId) {
+        // Update existing logic
+        const todo = todos.find(t => t.id === editingId);
+        if (todo) {
+            const updates = {
+                text: text,
+                reminder: reminder || null
+            };
 
-    // Optimistically add to UI
-    todos.unshift(newTodo);
-    renderTodos();
+            // Optimistic update
+            todo.text = text;
+            todo.reminder = updates.reminder;
+            renderTodos();
 
-    // Save to database
-    const success = await saveTodo(newTodo);
+            cancelEdit(); // Reset UI
 
-    if (!success) {
-        todos = todos.filter(t => t !== newTodo);
+            await updateTodo(todo.id, updates);
+        }
+    } else {
+        // Create new logic
+        const newTodo = {
+            id: null,
+            text,
+            reminder,
+            completed: false,
+            createdAt: new Date().toISOString()
+        };
+
+        // Optimistically add to UI
+        todos.unshift(newTodo);
         renderTodos();
+
+        // Save to database
+        const success = await saveTodo(newTodo);
+
+        if (!success) {
+            todos = todos.filter(t => t !== newTodo);
+            renderTodos();
+        }
+
+        // Clear inputs
+        taskInput.value = '';
+        reminderInput.value = '';
+        selectedDateText.textContent = 'Due date';
+        datePickerBtn.style.borderColor = '';
+        datePickerBtn.style.color = '';
+        taskToolbar.classList.add('hidden');
+        taskToolbar.classList.remove('visible');
+        addTaskBtn.classList.add('hidden');
+        addTaskBtn.classList.remove('visible');
+
+        // Refocus input
+        taskInput.focus();
     }
-
-    // Clear inputs
-    taskInput.value = '';
-    reminderInput.value = '';
-    selectedDateText.textContent = 'Due date';
-    datePickerBtn.style.borderColor = '';
-    datePickerBtn.style.color = '';
-    taskToolbar.classList.add('hidden');
-    taskToolbar.classList.remove('visible');
-    addTaskBtn.classList.add('hidden');
-    addTaskBtn.classList.remove('visible');
-
-    // Refocus input
-    taskInput.focus();
 }
 
 addTaskBtn.addEventListener('click', addTask);
@@ -621,6 +712,12 @@ function renderTodos() {
             </div>
             <div class="task-actions">
                 ${calendarBtn}
+                <button class="task-action-btn edit" title="Edit task">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                    </svg>
+                </button>
                 <button class="task-action-btn delete" title="Delete task">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="3 6 5 6 21 6"></polyline>
@@ -632,6 +729,9 @@ function renderTodos() {
 
         const checkbox = li.querySelector('.task-checkbox');
         checkbox.addEventListener('change', () => toggleTodo(todo.id));
+
+        const editBtn = li.querySelector('.edit');
+        editBtn.addEventListener('click', () => editTodo(todo.id));
 
         const deleteBtn = li.querySelector('.delete');
         deleteBtn.addEventListener('click', () => deleteTodo(todo.id));
