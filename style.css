@@ -419,11 +419,13 @@ body {
     opacity: 0;
     transform: scale(0.9);
     pointer-events: none;
-    display: none; /* Hidden by display none initially */
+    display: none;
+    /* Hidden by display none initially */
 }
 
 .cancel-edit-btn.visible {
-    display: flex; /* Override display: none */
+    display: flex;
+    /* Override display: none */
     opacity: 1;
     transform: scale(1);
     pointer-events: all;
@@ -666,14 +668,17 @@ body {
 .due-date-chip {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 4px 10px;
+    gap: 3px;
+    padding: 2px 8px;
     background: rgba(78, 159, 255, 0.15);
     border: 1px solid rgba(78, 159, 255, 0.3);
     border-radius: var(--radius-full);
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1;
     color: var(--accent-end);
+    white-space: nowrap;
+    height: 20px;
 }
 
 .due-date-chip.overdue {
@@ -689,8 +694,8 @@ body {
 }
 
 .due-date-chip svg {
-    width: 11px;
-    height: 11px;
+    width: 10px;
+    height: 10px;
 }
 
 /* Task Actions */
@@ -849,6 +854,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.15);
 }
+
 /* Screen reader only - accessible hidden */
 .sr-only {
     position: absolute;
@@ -879,7 +885,7 @@ body {
 
 [data-theme="light"] body {
     background: var(--bg-space);
-    background-image: 
+    background-image:
         radial-gradient(ellipse 80% 50% at 50% -20%, rgba(78, 159, 255, 0.12), transparent),
         radial-gradient(ellipse 60% 80% at 0% 100%, rgba(0, 212, 255, 0.08), transparent);
 }
@@ -1339,26 +1345,26 @@ body {
         box-shadow: none !important;
         padding: var(--space-4) !important;
     }
-    
+
     .main-container {
         max-width: 100% !important;
         width: 100% !important;
     }
-    
+
     .app-wrapper {
         padding: 0 !important;
         min-height: 100vh;
     }
-    
+
     .app-header {
         padding-top: var(--space-8);
     }
-    
+
     /* Full-width task input on mobile */
     .task-input-container {
         border-radius: var(--radius-md) !important;
     }
-    
+
     /* Slightly rounded task items */
     .task-item {
         border-radius: var(--radius-md) !important;
@@ -1372,32 +1378,32 @@ body {
         padding-top: var(--space-4) !important;
         margin-bottom: var(--space-4) !important;
     }
-    
+
     .app-title {
         font-size: 24px !important;
         margin-bottom: var(--space-1) !important;
     }
-    
+
     .app-subtitle {
         font-size: 13px !important;
         margin-bottom: 0 !important;
     }
-    
+
     /* User menu in top corner */
     .user-menu-wrapper {
         top: var(--space-3) !important;
         right: var(--space-3) !important;
     }
-    
+
     /* Reduce overall vertical spacing */
     .task-input-wrapper {
         margin-bottom: var(--space-3) !important;
     }
-    
+
     .filter-tabs {
         margin-bottom: var(--space-2) !important;
     }
-    
+
     .tasks-container {
         margin-top: var(--space-2) !important;
     }
@@ -1411,7 +1417,7 @@ body {
         padding: 0 !important;
         padding-top: var(--space-3) !important;
     }
-    
+
     .app-card {
         background: transparent !important;
         backdrop-filter: none !important;
@@ -1421,29 +1427,29 @@ body {
         box-shadow: none !important;
         padding: 0 var(--space-4) !important;
     }
-    
+
     .app-card::before {
         display: none !important;
     }
-    
+
     .app-header {
         padding-top: 0 !important;
         margin-bottom: var(--space-5) !important;
     }
-    
+
     .app-title {
         font-size: 26px !important;
     }
-    
+
     .app-subtitle {
         font-size: 13px !important;
     }
-    
+
     .main-container {
         width: 100% !important;
         max-width: 100% !important;
     }
-    
+
     .user-menu-wrapper {
         top: var(--space-3) !important;
         right: var(--space-4) !important;
@@ -1458,9 +1464,11 @@ body {
 /* === DESIGN TOKENS: 8px Grid System === */
 :root {
     /* Unified Border Radius (NO exceptions) */
-    --radius-container: 16px;  /* Primary containers */
-    --radius-pill: 12px;       /* Chips, small pills */
-    
+    --radius-container: 16px;
+    /* Primary containers */
+    --radius-pill: 12px;
+    /* Chips, small pills */
+
     /* 8px Grid Spacing */
     --grid-1: 8px;
     --grid-2: 16px;
@@ -1468,15 +1476,15 @@ body {
     --grid-4: 32px;
     --grid-5: 40px;
     --grid-6: 48px;
-    
+
     /* Container Padding */
     --padding-card: 24px;
     --padding-card-mobile: 20px;
     --padding-item: 20px;
-    
+
     /* Task List Spacing */
     --task-gap: 12px;
-    
+
     /* Line Height (1.5x minimum) */
     --lh-tight: 1.5;
     --lh-normal: 1.6;
@@ -1666,20 +1674,20 @@ body {
     .app-card {
         padding: 0 var(--padding-card-mobile) !important;
     }
-    
+
     .task-item {
         padding: var(--grid-2) var(--grid-2) !important;
     }
-    
+
     .task-input-container {
         padding: var(--grid-1) var(--grid-2) !important;
     }
-    
+
     .task-checkbox {
         width: 20px !important;
         height: 20px !important;
     }
-    
+
     .app-title {
         font-size: 24px !important;
     }
@@ -1692,59 +1700,60 @@ body {
 
 /* On mobile, remove all extra padding/margins and align to screen edges */
 @media (max-width: 640px) {
+
     /* Base padding for the card content area */
     .app-card {
         padding-left: 16px !important;
         padding-right: 16px !important;
     }
-    
+
     /* Input bar - full width within card padding */
     .task-input-container {
         margin: 0 !important;
         width: 100% !important;
     }
-    
+
     /* Toolbar - align with input */
     .task-toolbar {
         padding-left: 0 !important;
         padding-right: 0 !important;
         margin: 0 !important;
     }
-    
+
     .toolbar-btn {
         margin-left: 0 !important;
     }
-    
+
     /* Tabs container - full width */
     .filter-tabs {
         width: 100% !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
-    
+
     .tabs-container {
         width: 100% !important;
     }
-    
+
     /* Task items - full width, no extra margin */
     .task-list {
         padding: 0 !important;
         margin: 0 !important;
     }
-    
+
     .task-item {
         margin-left: 0 !important;
         margin-right: 0 !important;
         width: 100% !important;
     }
-    
+
     /* Header - center aligned */
     .app-header {
         text-align: center !important;
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
-    
+
     /* User menu - align with right edge */
     .user-menu-wrapper {
         right: 16px !important;
@@ -1765,40 +1774,43 @@ body {
     --glass-primary: #ffffff;
     --glass-secondary: #fafafa;
     --glass-tertiary: #f5f5f5;
-    
+
     /* Text - AAA Contrast (=7:1) */
-    --text-primary: #171717;      /* 12.6:1 on white */
-    --text-secondary: #525252;    /* 7.2:1 on white */
-    --text-tertiary: #737373;     /* 5.7:1 - only for decorative */
-    
+    --text-primary: #171717;
+    /* 12.6:1 on white */
+    --text-secondary: #525252;
+    /* 7.2:1 on white */
+    --text-tertiary: #737373;
+    /* 5.7:1 - only for decorative */
+
     /* Accent - Electric Blue */
     --accent-start: #0070f3;
     --accent-end: #0061d4;
     --accent-gradient: linear-gradient(135deg, #0070f3 0%, #0061d4 100%);
-    
+
     /* Status Colors - Pastel with Dark Text (AAA) */
     --danger: #dc2626;
     --danger-bg: #fee2e2;
     --danger-text: #991b1b;
-    
+
     --warning: #d97706;
     --warning-bg: #fff4e6;
     --warning-text: #92400e;
-    
+
     --success: #16a34a;
     --success-bg: #dcfce7;
     --success-text: #166534;
-    
+
     --info-bg: #dbeafe;
     --info-text: #1e40af;
-    
+
     /* Shadows - Soft & Warm */
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.02);
     --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.03);
     --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.08), 0 6px 12px rgba(0, 0, 0, 0.04);
     --glow-accent: 0 0 0 3px rgba(0, 112, 243, 0.15);
-    
+
     /* Borders */
     --border-subtle: rgba(0, 0, 0, 0.06);
     --border-medium: rgba(0, 0, 0, 0.1);
@@ -1808,9 +1820,9 @@ body {
 /* === SMOOTH THEME TRANSITIONS === */
 * {
     transition: background-color 300ms ease,
-                border-color 300ms ease,
-                box-shadow 300ms ease,
-                color 200ms ease;
+        border-color 300ms ease,
+        box-shadow 300ms ease,
+        color 200ms ease;
 }
 
 /* === BODY LIGHT MODE === */
@@ -2193,11 +2205,16 @@ body {
 
 /* Override: Pure Warm White Colors (NO blue tint) */
 [data-theme="light"] {
-    --bg-space: #fdfdfd !important;        /* Pure warm white */
-    --bg-deep: #faf9f7 !important;         /* Soft linen */
-    --glass-primary: #ffffff !important;   /* True white */
-    --glass-secondary: #fafaf9 !important; /* Warm off-white */
-    --glass-tertiary: #f5f5f3 !important;  /* Warm light gray */
+    --bg-space: #fdfdfd !important;
+    /* Pure warm white */
+    --bg-deep: #faf9f7 !important;
+    /* Soft linen */
+    --glass-primary: #ffffff !important;
+    /* True white */
+    --glass-secondary: #fafaf9 !important;
+    /* Warm off-white */
+    --glass-tertiary: #f5f5f3 !important;
+    /* Warm light gray */
 }
 
 /* Fix: Remove harsh blue focus outline on input */
@@ -2292,32 +2309,33 @@ body {
         box-shadow: none !important;
         border-radius: 0 !important;
     }
-    
+
     .app-card::before {
         display: none !important;
     }
-    
+
     [data-theme="light"] .app-card {
         background: transparent !important;
         border: none !important;
         box-shadow: none !important;
     }
-    
+
     /* Make body full height with no gaps */
-    html, body {
-        min-height: 100vh;
-        min-height: -webkit-fill-available;
-    }
-    
+    html,
     body {
         min-height: 100vh;
         min-height: -webkit-fill-available;
     }
-    
+
+    body {
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+
     [data-theme="light"] body {
         background: #fdfdfd !important;
     }
-    
+
     .app-wrapper {
         min-height: 100vh !important;
         min-height: -webkit-fill-available !important;
@@ -2362,36 +2380,36 @@ body {
         height: 100dvh !important;
         overflow: hidden !important;
     }
-    
+
     .main-container {
         display: flex !important;
         flex-direction: column !important;
         height: 100% !important;
         overflow: hidden !important;
     }
-    
+
     .app-card {
         display: flex !important;
         flex-direction: column !important;
         height: 100% !important;
         overflow: hidden !important;
     }
-    
+
     /* Fixed header section */
     .app-header {
         flex-shrink: 0 !important;
     }
-    
+
     /* Fixed input section */
     .task-input-wrapper {
         flex-shrink: 0 !important;
     }
-    
+
     /* Fixed tabs section */
     .filter-tabs {
         flex-shrink: 0 !important;
     }
-    
+
     /* Scrollable task list */
     .tasks-container {
         flex: 1 !important;
@@ -2400,22 +2418,22 @@ body {
         -webkit-overflow-scrolling: touch !important;
         padding-bottom: 24px !important;
     }
-    
+
     /* Smooth scrolling */
     .tasks-container {
         scroll-behavior: smooth;
     }
-    
+
     /* Hide scrollbar for cleaner look */
     .tasks-container::-webkit-scrollbar {
         width: 4px;
     }
-    
+
     .tasks-container::-webkit-scrollbar-thumb {
         background: rgba(255, 255, 255, 0.1);
         border-radius: 4px;
     }
-    
+
     [data-theme="light"] .tasks-container::-webkit-scrollbar-thumb {
         background: rgba(0, 0, 0, 0.1);
     }
@@ -2705,6 +2723,7 @@ body {
 
 /* Mobile specific */
 @media (max-width: 640px) {
+
     .theme-toggle,
     .theme-toggle:focus,
     .theme-toggle:active {
@@ -2775,6 +2794,7 @@ button {
         opacity: 0;
         transform: translateX(-50%) translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateX(-50%) translateY(0);
@@ -2898,33 +2918,34 @@ button {
         right: 16px;
         transform: none;
     }
-    
+
     @keyframes slideUp {
         from {
             opacity: 0;
             transform: translateY(20px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
         }
     }
-    
+
     .notification-prompt-content {
         flex-wrap: wrap;
     }
-    
+
     .notification-prompt-buttons {
         width: 100%;
         justify-content: flex-end;
     }
-    
+
     .toast {
         left: 16px;
         right: 16px;
         transform: translateY(20px);
     }
-    
+
     .toast.visible {
         transform: translateY(0);
     }
