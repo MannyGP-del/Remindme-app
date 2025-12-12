@@ -58,6 +58,8 @@
 html,
 body {
     height: 100%;
+    min-height: 100dvh;
+    /* Dynamic viewport height */
     overflow-x: hidden;
 }
 
@@ -77,12 +79,14 @@ body {
 
 /* ===== App Wrapper ===== */
 .app-wrapper {
-    min-height: 100vh;
+    min-height: 100dvh;
+    /* Dynamic viewport height for mobile */
     display: flex;
     align-items: center;
     justify-content: center;
     padding: var(--space-6);
     position: relative;
+    width: 100%;
 }
 
 /* ===== User Avatar Menu ===== */
