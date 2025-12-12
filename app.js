@@ -692,17 +692,7 @@ function renderTodos() {
             `;
         }
 
-        // Calendar button
-        const calendarBtn = todo.reminder
-            ? `<a href="${generateCalendarUrl(todo.text, todo.reminder)}" target="_blank" class="task-action-btn calendar" title="Add to Google Calendar">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                </svg>
-               </a>`
-            : '';
+        // Calendar button removed
 
         li.innerHTML = `
             <input type="checkbox" class="task-checkbox" ${todo.completed ? 'checked' : ''}>
@@ -711,7 +701,6 @@ function renderTodos() {
                 ${dueDateHtml ? `<div class="task-meta">${dueDateHtml}</div>` : ''}
             </div>
             <div class="task-actions">
-                ${calendarBtn}
                 <button class="task-action-btn edit" title="Edit task">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -756,17 +745,6 @@ function formatDateForChip(date) {
         const dateString = taskDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
         return `${dateString}, ${timeString}`;
     }
-}
-
-function generateCalendarUrl(text, reminder) {
-    if (!reminder) return '';
-
-    const date = new Date(reminder);
-    const start = date.toISOString().replace(/[-:.]/g, '').slice(0, 15);
-    const endDate = new Date(date.getTime() + 60 * 60 * 1000);
-    const end = endDate.toISOString().replace(/[-:.]/g, '').slice(0, 15);
-
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(text)}&dates=${start}Z/${end}Z&details=Reminder%20from%20RemindMe`;
 }
 
 function escapeHtml(text) {

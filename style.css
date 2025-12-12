@@ -739,14 +739,6 @@ body {
     color: var(--danger);
 }
 
-.task-action-btn.calendar {
-    text-decoration: none;
-}
-
-.task-action-btn.calendar:hover {
-    background: rgba(78, 159, 255, 0.15);
-    color: var(--accent-start);
-}
 
 /* ===== Empty State ===== */
 .empty-state {
